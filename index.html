@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff6df">
+<title>Alphabet Shape Quest — Geometric A–Z Puzzle</title>
+<style>
+:root{--ink:#20304e;--muted:#73809a;--blue:#4b65ef;--pink:#ff5b9b;--yellow:#ffc94a;--green:#28c88b;--purple:#8a5cf6;--paper:#fff;--line:#e9e9f4}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif;background:radial-gradient(circle at 8% 0%,#ffebc9 0,transparent 28%),radial-gradient(circle at 95% 15%,#e6e5ff 0,transparent 30%),#fff9f0;min-height:100vh}button{font:inherit;border:0;cursor:pointer}button:focus-visible{outline:3px solid #ffad32;outline-offset:3px}
+.top{max-width:1240px;margin:auto;padding:16px clamp(14px,3vw,30px);display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:1000;font-size:clamp(18px,2.5vw,26px);letter-spacing:-.7px}.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:15px;color:#fff;background:linear-gradient(135deg,#ff5b9b,#805cf6);font-size:24px;box-shadow:0 6px 0 #e5c8ff}.top-actions{display:flex;gap:8px}.btn{border-radius:14px;padding:10px 14px;font-weight:850;transition:transform .15s,filter .15s}.btn:hover{transform:translateY(-1px);filter:brightness(1.02)}.btn-light{background:#fff;border:1px solid var(--line);color:var(--ink);box-shadow:0 4px 0 #eae8f2}.btn-main{background:linear-gradient(135deg,#4b65ef,#905cf5);color:white;box-shadow:0 5px 0 #d3c9ff}.btn-pink{background:linear-gradient(135deg,#ff5b9b,#ff8b74);color:#fff;box-shadow:0 5px 0 #ffd0dc}
+.progress{max-width:1180px;margin:0 auto;padding:0 clamp(14px,3vw,30px) 14px}.progress-top{display:flex;justify-content:space-between;color:var(--muted);font-weight:850;font-size:13px;margin-bottom:7px}.bar{height:10px;border-radius:99px;background:#eeeaf9;overflow:hidden}.bar>div{height:100%;width:0;background:linear-gradient(90deg,#25c98c,#55c5f7,#8e62f5);border-radius:99px;transition:width .3s}
+.ad{max-width:1180px;margin:0 auto 12px;padding:0 clamp(14px,3vw,30px)}
+.ad.sticky-ad{position:sticky;top:0;z-index:15;background:rgba(255,249,240,.94);backdrop-filter:blur(10px);padding-top:5px;padding-bottom:5px;border-radius:0 0 14px 14px}
+.ad.sticky-ad .ad-inner{min-height:42px;border-radius:10px}
+.ad.sticky-ad .ad-inner b{display:inline;margin-right:8px}
+.ad.sticky-ad .ad-inner div{font-size:10px}.ad-inner{min-height:54px;border:1px dashed #d9d9e6;background:#ffffff88;border-radius:14px;display:flex;justify-content:center;align-items:center;text-align:center;color:#a0a6b7;font-size:11px;padding:8px}.ad b{display:block;font-size:10px;letter-spacing:1.2px;color:#9399ad;margin-bottom:3px}
+main{max-width:1180px;margin:auto;padding:0 clamp(14px,3vw,30px) 22px}.intro{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin:6px 0 17px}.eyebrow{text-transform:uppercase;letter-spacing:1.7px;font-size:11px;color:#8b5be8;font-weight:1000}h1{font-size:clamp(27px,4vw,42px);line-height:1.05;letter-spacing:-1.3px;margin:5px 0 7px}.intro p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.badge{background:#fff;border:1px solid #efe4cb;border-radius:99px;padding:10px 14px;font-weight:900;font-size:12px;white-space:nowrap}
+.layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(285px,.8fr);gap:17px;align-items:stretch}
+.bottom-intro{margin:16px 0 4px;padding:12px 15px;border-radius:17px;background:#fff9e7;border:1px solid #f6e8bf}
+.bottom-intro h1{font-size:clamp(20px,3vw,28px);margin:4px 0}
+.bottom-intro p{font-size:12px}
+@media(min-width:821px){.sticky-ad{max-width:100%;}.sticky-ad .ad-inner{max-width:1180px;margin:auto}}
+.card{background:#ffffffed;border:1px solid #eeeaf5;border-radius:24px;padding:clamp(14px,2.3vw,23px);box-shadow:0 12px 32px #4b44780b;min-width:0}.cardhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.cardhead h2{font-size:16px;margin:0}.tiny{font-size:12px;color:var(--muted);font-weight:800}.letterhead{display:flex;align-items:center;gap:12px;margin:0 0 12px}.letter-chip{font-size:clamp(44px,6vw,66px);font-weight:1000;line-height:1;color:#4b65ef;text-shadow:0 4px 0 #dce1ff}.letter-info strong{display:block;font-size:16px}.letter-info span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.sound{margin-left:auto;background:#eaf8ff;color:#2178a8;border-radius:14px;padding:11px 12px;font-weight:900}
+.board-wrap{position:relative;background:linear-gradient(145deg,#fffdf9,#f3f3ff);border:2px dashed #d7d8ef;border-radius:20px;padding:10px;max-width:620px;margin:auto}.board{width:100%;height:auto;display:block;touch-action:none;border-radius:12px}.board-note{text-align:center;color:var(--muted);font-size:12px;margin:10px 0 0;line-height:1.4}.right-card{display:flex;flex-direction:column}.tray-title{display:flex;align-items:center;justify-content:space-between;gap:8px}.tray-title h2{font-size:17px;margin:0}.instructions{font-size:13px;line-height:1.5;color:var(--muted);margin:7px 0 13px}.tray{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:10px;border-radius:17px;background:#f8f7ff;border:1px solid #eeebfa;min-height:190px;align-content:start}.piece{position:relative;background:white;border:1px solid #e6e4f2;border-radius:13px;min-height:82px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 4px 0 #e5e1f1;touch-action:none;user-select:none;padding:5px}.piece:active{transform:scale(.98)}.piece canvas{max-width:100%;max-height:74px;width:auto;height:auto;display:block;object-fit:contain;touch-action:none}.piece small{position:absolute;right:5px;top:3px;color:#a3a9bb;font-size:9px;font-weight:900}.piece.used{display:none}.tray-empty{grid-column:1/-1;padding:30px 8px;text-align:center;color:#4b65ef;font-weight:900}.controls{display:flex;gap:8px;margin-top:12px}.controls button{flex:1}.tip{margin-top:12px;padding:11px 12px;border-radius:14px;background:#fff5ce;border:1px solid #ffe8a0;color:#80601b;font-size:12px;line-height:1.45}.tip strong{display:block;margin-bottom:2px}.alphabet{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:18px auto 0}.letter-nav{width:34px;height:34px;border-radius:11px;background:#fff;border:1px solid #e8e4f3;color:#7b8297;font-weight:950;box-shadow:0 3px 0 #ece8f5}.letter-nav.done{background:#dff9e9;color:#128051;border-color:#b2eccb}.letter-nav.active{background:#4b65ef;color:#fff;border-color:#4b65ef;box-shadow:0 3px 0 #c5caff}.letter-nav:disabled{opacity:.45;cursor:not-allowed}.foot{text-align:center;color:#9ba1b2;font-size:11px;padding:0 15px 25px}.modal-bg{position:fixed;inset:0;background:#18244388;display:none;place-items:center;padding:16px;z-index:20}.modal-bg.show{display:grid}.modal{background:#fff;border-radius:26px;padding:26px;max-width:400px;width:100%;text-align:center;box-shadow:0 24px 80px #10183255;animation:pop .25s ease}.emoji{font-size:52px}.modal h2{margin:7px 0;font-size:29px}.modal p{color:var(--muted);line-height:1.5}.modal-actions{display:flex;gap:9px;margin-top:18px}.modal-actions button{flex:1}.toast{position:fixed;z-index:40;left:50%;bottom:18px;transform:translate(-50%,20px);background:#20304e;color:#fff;border-radius:14px;padding:12px 16px;font-size:13px;font-weight:850;opacity:0;pointer-events:none;transition:.2s;text-align:center;max-width:90vw}.toast.show{opacity:1;transform:translate(-50%,0)}.confetti{position:fixed;top:-14px;width:9px;height:14px;border-radius:3px;z-index:25;pointer-events:none;animation:fall 1.8s linear forwards}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}@keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:.2}}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.right-card{order:1}.tray{grid-template-columns:repeat(4,minmax(0,1fr));min-height:120px}.piece{min-height:70px}.intro{align-items:flex-start}.card{border-radius:20px}}
+@media(max-width:480px){.sticky-ad{padding-left:10px;padding-right:10px;margin-bottom:8px}.sticky-ad .ad-inner{min-height:38px;padding:5px}.sticky-ad .ad-inner div{font-size:9px}.top{padding-top:10px;padding-bottom:12px}.brand{font-size:16px;gap:7px}.logo{width:36px;height:36px}.top-actions .btn{font-size:11px;padding:9px}.intro{display:block}.badge{display:inline-block;margin-top:10px}.card{padding:13px;border-radius:18px}.letter-chip{font-size:50px}.letter-info strong{font-size:14px}.sound{padding:9px;font-size:12px}.board-wrap{padding:6px;border-radius:15px}.tray{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:7px}.piece{min-height:67px}.piece canvas{max-height:58px}.controls .btn{padding:10px 8px;font-size:12px}.letter-nav{width:30px;height:30px}.ad-inner{min-height:45px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Compact, game-first layout */
+.compact-cardhead{margin:0 0 5px;min-height:10px;justify-content:flex-end}
+.compact-tray-title{justify-content:flex-end;margin-bottom:5px;min-height:10px}
+.success-ad{border:1px dashed #bfc4d5;border-radius:13px;background:#f7f8fc;color:#9299ad;padding:12px 8px;margin:0 0 14px;text-align:center;font-size:11px;min-height:54px}
+.success-ad span{display:block;font-size:9px;letter-spacing:1.2px;font-weight:900;margin-bottom:4px}
+.modal{padding:20px}
+.modal p{margin:8px 0 14px}
+@media(max-width:600px){
+ body{min-height:100dvh}
+ .top{padding:7px 10px;gap:5px}
+ .brand{font-size:14px;letter-spacing:-.4px}
+ .logo{width:31px;height:31px;border-radius:11px;font-size:18px}
+ .top-actions{gap:5px}
+ .top-actions .btn{padding:7px 8px;font-size:10px;border-radius:10px;box-shadow:0 2px 0 #eae8f2}
+ .progress{padding:0 10px 7px}
+ .progress-top{font-size:10px;margin-bottom:4px}
+ .bar{height:6px}
+ .sticky-ad{margin:0 auto 6px;padding:3px 8px}
+ .sticky-ad .ad-inner{min-height:29px;padding:4px;border-radius:8px}
+ .sticky-ad .ad-inner b{font-size:8px;margin-right:4px}
+ .sticky-ad .ad-inner div{font-size:8px}
+ main{padding:0 8px 8px}
+ .intro{display:none}
+ .layout{grid-template-columns:minmax(0,1fr);gap:7px;align-items:start}
+ .card{padding:8px;border-radius:14px;min-width:0}
+ .cardhead,.tray-title{margin-bottom:4px}
+ .tiny{font-size:9px}
+ .letterhead{gap:5px;margin:0 0 5px;align-items:center;flex-wrap:wrap}
+ .letter-chip{font-size:36px;line-height:.95;text-shadow:0 2px 0 #dce1ff}
+ .letter-info{flex:1;min-width:0}
+ .letter-info strong{font-size:11px;line-height:1.1}
+ .letter-info span{display:none}
+ .sound{margin-left:0;padding:5px 6px;font-size:9px;border-radius:9px}
+ .board-wrap{padding:3px;border-radius:10px;border-width:1px}
+ .board{width:100%;height:clamp(230px,36vh,310px);object-fit:fill}
+ .right-card{order:0;display:flex;min-height:0}
+ .action-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:0 0 8px}
+ .action-row .btn{min-width:0;white-space:nowrap;font-size:10px;padding:9px 3px}
+ .compact-tray-title{margin:0 0 4px}
+ .tray{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border-radius:10px;min-height:0;align-content:start}
+ .piece{min-width:0;min-height:clamp(42px,7.7vh,60px);padding:2px;border-radius:7px;box-shadow:0 2px 0 #e5e1f1}
+ .piece canvas{max-width:100%;max-height:clamp(31px,5.8vh,46px)}
+ .piece small{font-size:7px;right:3px;top:1px}
+ .controls{gap:4px;margin-top:6px;flex-direction:row}
+ .action-row.controls{margin-top:0}
+ .controls .btn{padding:7px 4px;font-size:9px;border-radius:9px;box-shadow:0 2px 0 #d3c9ff}
+ .board-note,.instructions,.tip,.bottom-intro,.alphabet,.foot{display:none!important}
+ .tray-empty{padding:14px 3px;font-size:11px}
+ .modal{padding:14px;border-radius:20px}
+ .success-ad{min-height:45px;padding:8px;margin-bottom:9px}
+ .modal-actions{gap:6px;margin-top:10px}
+ .modal-actions .btn{font-size:11px;padding:9px 5px}
+}
+@media(max-width:380px){
+ .layout{grid-template-columns:minmax(0,1fr);gap:5px}
+ .action-row .btn{font-size:9px;padding:8px 2px}
+ .card{padding:6px}
+ .board{height:clamp(220px,34vh,280px)}
+ .letter-chip{font-size:31px}
+ .sound{font-size:8px;padding:4px}
+ .controls .btn{font-size:8px}
+ .piece{min-height:39px}
+ .piece canvas{max-height:29px}
+}
+
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand"><span class="logo">✦</span><span>Alphabet <span style="color:#885bf1">Shape Quest</span></span></div>
+ <div class="top-actions"><button class="btn btn-light" id="soundToggle">🔊 Sound</button><button class="btn btn-light" id="restart">↻ Restart</button></div>
+</header>
+<span id="levelBadge" hidden></span>\n<section class="progress">
+ <div class="progress-top"><span id="progressLabel">Letter 1 of 26</span><span id="progressPct">0% complete</span></div>
+ <div class="bar"><div id="progressFill"></div></div>
+</section>
+<div class="ad sticky-ad"><div class="ad-inner"><div><b>ADVERTISEMENT</b>Google AdSense banner placeholder · stays visible during play</div></div></div>
+<main>
+ <section class="layout">
+  <div class="card">
+   <div class="cardhead compact-cardhead"><span class="tiny" id="pieceProgress">0 pieces placed</span></div>
+   <div class="letterhead"><div class="letter-chip" id="letterChip">A</div><div class="letter-info"><strong id="wordLine">A is for Apple 🍎</strong><span id="helperLine">Drag pieces onto the matching letter.</span></div><button class="sound" id="hear">🔊 Hear it</button></div>
+   <p id="boardNote" hidden></p><div class="board-wrap"><canvas id="board" class="board" width="600" height="510" aria-label="Puzzle letter outline"></canvas></div>
+   
+  </div>
+  <aside class="card right-card">
+   <div class="controls action-row">
+    <button class="btn btn-main" id="hint">💡 Hint</button>
+    <button class="btn btn-light" id="mix">🔀 Mix</button>
+    <button class="btn btn-light" id="prev">← Previous</button>
+    <button class="btn btn-pink" id="next" disabled>Next →</button>
+   </div>
+   <div class="tray-title compact-tray-title"><span class="tiny" id="remaining">0 left</span></div>
+   <div class="tray" id="tray"></div>
+  </aside>
+ </section>
+
+</main>
+<footer class="foot">A colorful little challenge for curious minds. Progress stays in this page session.</footer>
+<div class="modal-bg" id="winModal" role="dialog" aria-modal="true" aria-label="Letter completed"><div class="modal"><div class="success-ad"><span>ADVERTISEMENT</span><div>Google AdSense placeholder</div></div><p id="winMessage">You rebuilt the letter!</p><div class="modal-actions"><button class="btn btn-light" id="hearAgain">🔊 Hear again</button><button class="btn btn-main" id="continue">Next letter →</button></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(()=> {
+"use strict";
+const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const words={A:["Apple","🍎"],B:["Ball","⚽"],C:["Cat","🐱"],D:["Dog","🐶"],E:["Elephant","🐘"],F:["Fish","🐟"],G:["Giraffe","🦒"],H:["House","🏠"],I:["Ice cream","🍦"],J:["Juice","🧃"],K:["Kite","🪁"],L:["Lion","🦁"],M:["Moon","🌙"],N:["Nest","🪺"],O:["Orange","🍊"],P:["Penguin","🐧"],Q:["Queen","👑"],R:["Rainbow","🌈"],S:["Sun","☀️"],T:["Tiger","🐯"],U:["Umbrella","☂️"],V:["Van","🚐"],W:["Whale","🐳"],X:["Xylophone","🎵"],Y:["Yo-yo","🪀"],Z:["Zebra","🦓"]};
+const colors=["#ff5b8f","#ff9d3d","#ffc936","#32c995","#35b6e8","#4f7bff","#9460f6","#e45ad0"];
+const $=id=>document.getElementById(id);
+const board=$("board"),ctx=board.getContext("2d");
+let index=0, soundOn=true, completed=new Set(), pieces=[], placed=new Set(), dragging=null, toastTimer=null, autoTimer=null;
+const W=600,H=510, FONT="900 400px 'Arial Rounded MT Bold', 'Trebuchet MS', system-ui, sans-serif";
+function toast(s){const el=$("toast");el.textContent=s;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),1800)}
+function speak(s){if(!soundOn)return;try{if(!("speechSynthesis"in window)){toast("Audio is not supported in this browser.");return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(s);u.lang="en-US";u.rate=.78;u.pitch=1.12;speechSynthesis.speak(u)}catch(e){}}
+const BITMAP={
+A:["01110","10001","10001","11111","10001","10001","10001"],B:["11110","10001","10001","11110","10001","10001","11110"],C:["01111","10000","10000","10000","10000","10000","01111"],D:["11110","10001","10001","10001","10001","10001","11110"],E:["11111","10000","10000","11110","10000","10000","11111"],F:["11111","10000","10000","11110","10000","10000","10000"],G:["01111","10000","10000","10111","10001","10001","01111"],H:["10001","10001","10001","11111","10001","10001","10001"],I:["11111","00100","00100","00100","00100","00100","11111"],J:["00111","00010","00010","00010","10010","10010","01100"],K:["10001","10010","10100","11000","10100","10010","10001"],L:["10000","10000","10000","10000","10000","10000","11111"],M:["10001","11011","10101","10101","10001","10001","10001"],N:["10001","11001","11001","10101","10011","10011","10001"],O:["01110","10001","10001","10001","10001","10001","01110"],P:["11110","10001","10001","11110","10000","10000","10000"],Q:["01110","10001","10001","10001","10101","10010","01101"],R:["11110","10001","10001","11110","10100","10010","10001"],S:["01111","10000","10000","01110","00001","00001","11110"],T:["11111","00100","00100","00100","00100","00100","00100"],U:["10001","10001","10001","10001","10001","10001","01110"],V:["10001","10001","10001","10001","10001","01010","00100"],W:["10001","10001","10001","10101","10101","10101","01010"],X:["10001","10001","01010","00100","01010","10001","10001"],Y:["10001","10001","01010","00100","00100","00100","00100"],Z:["11111","00001","00010","00100","01000","10000","11111"]};
+function glyphCanvas(ch){
+ const c=document.createElement("canvas");c.width=400;c.height=400;const g=c.getContext("2d",{willReadFrequently:true});
+ g.clearRect(0,0,400,400);g.fillStyle="#000";g.textAlign="center";g.textBaseline="middle";
+ // Arial is widely available; verify actual alpha pixels rather than assuming a font was rendered.
+ g.font='900 350px Arial, sans-serif';g.fillText(ch,200,205);
+ let pixels=g.getImageData(0,0,400,400).data, count=0;
+ for(let i=3;i<pixels.length;i+=4)if(pixels[i]>20)count++;
+ if(count>80){
+   let minX=400,minY=400,maxX=0,maxY=0;
+   for(let y=0;y<400;y+=2)for(let x=0;x<400;x+=2)if(pixels[(y*400+x)*4+3]>20){minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y)}
+   const cw=maxX-minX+1,chh=maxY-minY+1,norm=document.createElement("canvas");norm.width=400;norm.height=400;const ng=norm.getContext("2d");
+   const scale=Math.min(330/cw,360/chh),dw=cw*scale,dh=chh*scale;
+   ng.drawImage(c,minX,minY,cw,chh,(400-dw)/2,(400-dh)/2,dw,dh);return norm;
+ }
+ // Fallback: guaranteed visible uppercase glyph from a built-in 5x7 capital alphabet.
+ // The bitmap is only the silhouette; the pieces below are still clipped by larger diagonal polygons.
+ const pattern=BITMAP[ch]||BITMAP.A, cell=47, gap=7, totalW=5*cell+4*gap,totalH=7*cell+6*gap, ox=(400-totalW)/2,oy=(400-totalH)/2;
+ g.clearRect(0,0,400,400);g.fillStyle="#000";
+ pattern.forEach((row,r)=>[...row].forEach((v,col)=>{if(v==="1")g.fillRect(ox+col*(cell+gap),oy+r*(cell+gap),cell,gap+cell)}));
+ return c;
+}
+// Eight polygonal sectors tile the entire glyph canvas exactly. Each piece is the glyph clipped by one sector.
+function sectorPolygons(){
+ const cx=200,cy=200;
+ // Eight broad geometric cuts: fewer, larger pieces that are easier for children to grab.
+ const ring=[[0,0],[200,0],[400,0],[400,200],[400,400],[200,400],[0,400],[0,200]];
+ const polys=[];
+ for(let i=0;i<ring.length;i++)polys.push([[cx,cy],ring[i],ring[(i+1)%ring.length]]);
+ return polys;
+}
+function makePuzzle(ch){
+ const glyph=glyphCanvas(ch), gctx=glyph.getContext("2d"), polys=sectorPolygons(), list=[];
+ polys.forEach((poly,i)=>{
+   const tmp=document.createElement("canvas");tmp.width=400;tmp.height=400;const t=tmp.getContext("2d");
+   t.save();t.beginPath();poly.forEach((pt,j)=>j?t.lineTo(pt[0],pt[1]):t.moveTo(pt[0],pt[1]));t.closePath();t.clip();t.drawImage(glyph,0,0);t.restore();
+   const data=t.getImageData(0,0,400,400).data;let minX=400,minY=400,maxX=-1,maxY=-1;
+   for(let y=0;y<400;y+=2)for(let x=0;x<400;x+=2)if(data[(y*400+x)*4+3]>20){minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y)}
+   if(maxX<0)return;
+   minX=Math.max(0,minX-2);minY=Math.max(0,minY-2);maxX=Math.min(399,maxX+3);maxY=Math.min(399,maxY+3);
+   const cut=document.createElement("canvas");cut.width=maxX-minX+1;cut.height=maxY-minY+1;const cutCtx=cut.getContext("2d");cutCtx.drawImage(tmp,minX,minY,cut.width,cut.height,0,0,cut.width,cut.height);
+   // Color each exact letter fragment while preserving its original alpha-mask geometry.
+   cutCtx.globalCompositeOperation="source-in";cutCtx.fillStyle=colors[i%colors.length];cutCtx.fillRect(0,0,cut.width,cut.height);cutCtx.globalCompositeOperation="source-over";
+   // Keep exact crop origin so the piece returns to its mathematically correct position.
+   list.push({id:i,canvas:cut,x:minX,y:minY,w:cut.width,h:cut.height,homeX:minX,homeY:minY,color:colors[i%colors.length],placed:false,order:0});
+ });
+ // Safety net: never allow a blank board. If an unusual browser produced no detectable
+ // fragments, create four clipped diagonal polygon slices from the guaranteed glyph mask.
+ if(list.length<3){
+   list.length=0;
+   const fallbackPolys=[
+    [[0,0],[235,0],[0,235]],
+    [[235,0],[400,0],[400,165],[235,235],[0,235]],
+    [[0,235],[235,235],[400,165],[400,400],[165,400]],
+    [[0,235],[0,400],[165,400],[235,235]]
+   ];
+   fallbackPolys.forEach((poly,i)=>{
+    const tmp=document.createElement("canvas");tmp.width=400;tmp.height=400;const t=tmp.getContext("2d");
+    t.save();t.beginPath();poly.forEach((pt,j)=>j?t.lineTo(pt[0],pt[1]):t.moveTo(pt[0],pt[1]));t.closePath();t.clip();t.drawImage(glyph,0,0);t.restore();
+    const data=t.getImageData(0,0,400,400).data;let minX=400,minY=400,maxX=-1,maxY=-1;
+    for(let y=0;y<400;y+=2)for(let x=0;x<400;x+=2)if(data[(y*400+x)*4+3]>20){minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y)}
+    if(maxX<0)return;minX=Math.max(0,minX-2);minY=Math.max(0,minY-2);maxX=Math.min(399,maxX+3);maxY=Math.min(399,maxY+3);
+    const cut=document.createElement("canvas");cut.width=maxX-minX+1;cut.height=maxY-minY+1;const cc=cut.getContext("2d");cc.drawImage(t,minX,minY,cut.width,cut.height,0,0,cut.width,cut.height);cc.globalCompositeOperation="source-in";cc.fillStyle=colors[i%colors.length];cc.fillRect(0,0,cut.width,cut.height);cc.globalCompositeOperation="source-over";
+    list.push({id:i,canvas:cut,x:minX,y:minY,w:cut.width,h:cut.height,homeX:minX,homeY:minY,color:colors[i%colors.length],placed:false,order:i+1});
+   });
+ }
+ // Merge tiny anti-aliased/sliver fragments into a nearby real piece.
+ // This prevents an almost-empty "extra" tray piece from blocking completion on any letter.
+ function alphaCount(piece){
+   const d=piece.canvas.getContext("2d").getImageData(0,0,piece.w,piece.h).data;
+   let count=0;for(let k=3;k<d.length;k+=4)if(d[k]>24)count++;
+   return count;
+ }
+ function mergePieceInto(target, tiny){
+   const full=document.createElement("canvas");full.width=400;full.height=400;
+   const f=full.getContext("2d");
+   f.drawImage(target.canvas,target.homeX,target.homeY);
+   f.drawImage(tiny.canvas,tiny.homeX,tiny.homeY);
+   // Recolor the combined alpha mask uniformly as the target piece.
+   f.globalCompositeOperation="source-in";f.fillStyle=target.color;f.fillRect(0,0,400,400);f.globalCompositeOperation="source-over";
+   const d=f.getImageData(0,0,400,400).data;let minX=400,minY=400,maxX=-1,maxY=-1;
+   for(let y=0;y<400;y++)for(let x=0;x<400;x++)if(d[(y*400+x)*4+3]>24){if(x<minX)minX=x;if(y<minY)minY=y;if(x>maxX)maxX=x;if(y>maxY)maxY=y;}
+   if(maxX<0)return false;
+   minX=Math.max(0,minX-1);minY=Math.max(0,minY-1);maxX=Math.min(399,maxX+1);maxY=Math.min(399,maxY+1);
+   const merged=document.createElement("canvas");merged.width=maxX-minX+1;merged.height=maxY-minY+1;
+   merged.getContext("2d").drawImage(full,minX,minY,merged.width,merged.height,0,0,merged.width,merged.height);
+   target.canvas=merged;target.x=minX;target.y=minY;target.w=merged.width;target.h=merged.height;target.homeX=minX;target.homeY=minY;
+   return true;
+ }
+ // Iterate backwards so removing a tiny fragment cannot skip another candidate.
+ for(let i=list.length-1;i>=0;i--){
+   const tiny=list[i];
+   if(alphaCount(tiny)>=1500)continue;
+   if(list.length<=1)break;
+   let target=null,best=Infinity;
+   const tx=tiny.homeX+tiny.w/2,ty=tiny.homeY+tiny.h/2;
+   for(let j=0;j<list.length;j++){
+     if(j===i)continue;
+     const q=list[j],qx=q.homeX+q.w/2,qy=q.homeY+q.h/2;
+     const dist=(tx-qx)*(tx-qx)+(ty-qy)*(ty-qy);
+     if(dist<best){best=dist;target=q;}
+   }
+   if(target&&mergePieceInto(target,tiny))list.splice(i,1);
+ }
+ // Safety cap: merge any remaining smallest fragments until there are at most 8 pieces.
+ while(list.length>8){
+   let smallestIndex=0,smallestArea=Infinity;
+   for(let i=0;i<list.length;i++){const area=alphaCount(list[i]);if(area<smallestArea){smallestArea=area;smallestIndex=i;}}
+   const tiny=list[smallestIndex];let target=null,best=Infinity;
+   const tx=tiny.homeX+tiny.w/2,ty=tiny.homeY+tiny.h/2;
+   for(let j=0;j<list.length;j++){if(j===smallestIndex)continue;const q=list[j],qx=q.homeX+q.w/2,qy=q.homeY+q.h/2;const d=(tx-qx)*(tx-qx)+(ty-qy)*(ty-qy);if(d<best){best=d;target=q;}}
+   if(!target||!mergePieceInto(target,tiny))break;
+   list.splice(smallestIndex,1);
+ }
+ // Shuffle order only; geometry and original coordinates are unchanged.
+ list.sort(()=>Math.random()-.5).forEach((p,i)=>p.order=i+1);
+ return {glyph,pieces:list};
+}
+function drawBoard(){
+ ctx.clearRect(0,0,W,H);
+ const grd=ctx.createLinearGradient(0,0,W,H);grd.addColorStop(0,"#fffdf8");grd.addColorStop(1,"#f1f1ff");ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
+ const gx=100,gy=55,g=state.glyph;
+ // Pale, full-letter target silhouette stays visible behind all pieces.
+ ctx.save();ctx.globalAlpha=.18;ctx.drawImage(g,gx,gy,400,400);ctx.restore();
+ // Draw the geometric cut pattern, clipped to the actual glyph silhouette.
+ const lines=document.createElement("canvas");lines.width=400;lines.height=400;const lc=lines.getContext("2d");
+ lc.strokeStyle="#7b86a6";lc.lineWidth=2.2;lc.setLineDash([5,4]);
+ sectorPolygons().forEach(poly=>{lc.beginPath();poly.forEach((pt,i)=>i?lc.lineTo(pt[0],pt[1]):lc.moveTo(pt[0],pt[1]));lc.closePath();lc.stroke()});
+ lc.globalCompositeOperation="destination-in";lc.drawImage(g,0,0);lc.globalCompositeOperation="source-over";
+ ctx.save();ctx.globalAlpha=.62;ctx.drawImage(lines,gx,gy);ctx.restore();
+ // While dragging, show a glowing shadow ONLY for this piece and only when it overlaps its own target area.
+ if(dragging&&dragging.boardPoint){
+   const p=dragging.p,pt=dragging.boardPoint;
+   const px=pt.x-p.w/2,py=pt.y-p.h/2,tx=gx+p.homeX,ty=gy+p.homeY;
+   const ix=Math.max(0,Math.min(px+p.w,tx+p.w)-Math.max(px,tx));
+   const iy=Math.max(0,Math.min(py+p.h,ty+p.h)-Math.max(py,ty));
+   const overlap=(ix*iy)/Math.max(1,p.w*p.h);
+   const nearOwnTarget=Math.abs((px+p.w/2)-(tx+p.w/2))<Math.max(40,p.w*.58)&&Math.abs((py+p.h/2)-(ty+p.h/2))<Math.max(40,p.h*.58);
+   if(overlap>.12&&nearOwnTarget){
+     ctx.save();ctx.shadowColor="#37bfff";ctx.shadowBlur=20;ctx.fillStyle="#55c9ff";ctx.globalAlpha=.32;
+     ctx.drawImage(p.canvas,tx,ty);ctx.restore();
+     ctx.save();ctx.strokeStyle="#24a9ff";ctx.lineWidth=4;ctx.setLineDash([8,5]);ctx.shadowColor="#35bfff";ctx.shadowBlur=12;ctx.strokeRect(tx,ty,p.w,p.h);ctx.restore();
+   }
+ }
+ // Correctly placed fragments use their original crop coordinates, so they reconstruct the exact source glyph.
+ pieces.forEach(p=>{if(p.placed)ctx.drawImage(p.canvas,gx+p.homeX,gy+p.homeY);});
+ ctx.strokeStyle="#e3e5f5";ctx.lineWidth=2;ctx.strokeRect(8,8,W-16,H-16);
+}
+let state={glyph:null};
+function render(){
+ const ch=letters[index], [word,emoji]=words[ch];
+ $("letterChip").textContent=ch;$("wordLine").textContent=ch+" is for "+word+" "+emoji;$("helperLine").textContent="Put the pieces back to build "+ch+".";
+ const levelBadge=$("levelBadge");if(levelBadge)levelBadge.textContent=(index<8?"🌈 Explorer":index<17?"🚀 Shape Solver":"🏆 Alphabet Hero")+" · Level "+(index+1);
+ $("progressLabel").textContent="Letter "+(index+1)+" of 26";$("progressPct").textContent=Math.round(completed.size/26*100)+"% complete";$("progressFill").style.width=(completed.size/26*100)+"%";
+ $("pieceProgress").textContent=placed.size+" / "+pieces.length+" pieces";$("remaining").textContent=(pieces.length-placed.size)+" left";
+ $("prev").disabled=index===0;$("next").disabled=!completed.has(ch)||index===25;$("next").textContent=index===25?"All done!":"Next letter →";
+ const tray=$("tray");tray.innerHTML="";
+ const available=pieces.filter(p=>!p.placed);
+ if(pieces.length===0){tray.innerHTML='<div class="tray-empty">Loading puzzle pieces… tap Restart to try again.</div>'; $("pieceProgress").textContent="Puzzle not ready"; $("remaining").textContent="0 left"; if($("boardNote"))$("boardNote").textContent="The puzzle could not be generated. Please restart this letter."; $("next").disabled=true; return;}
+ if(!available.length)tray.innerHTML='<div class="tray-empty">✨ Every piece is in place!</div>';
+ available.forEach(p=>{
+   const b=document.createElement("button");b.className="piece";b.type="button";b.dataset.id=p.id;b.setAttribute("aria-label","Puzzle piece "+p.order);
+   const mini=document.createElement("canvas");mini.width=p.w;mini.height=p.h;mini.getContext("2d").drawImage(p.canvas,0,0);b.appendChild(mini);
+   const n=document.createElement("small");n.textContent=p.order;b.appendChild(n);
+   b.addEventListener("pointerdown",e=>startDrag(e,p,b));tray.appendChild(b);
+ });
+ renderNav();drawBoard();$("hint").disabled=!available.length;$("mix").disabled=available.length<2;
+}
+function renderNav(){const nav=$("alphabetNav");if(!nav)return;nav.innerHTML="";letters.forEach((ch,i)=>{const b=document.createElement("button");b.className="letter-nav"+(completed.has(ch)?" done":"")+(i===index?" active":"");b.textContent=ch;b.title="Letter "+ch;b.disabled=i>index&&!completed.has(letters[i-1]);b.addEventListener("click",()=>{if(i<=index||completed.has(letters[i-1]))go(i);else toast("Solve the previous letter to unlock this one.")});nav.appendChild(b)})}
+function boardScale(){const r=board.getBoundingClientRect();return {sx:r.width/W,sy:r.height/H,rect:r}}
+function startDrag(e,p,el){
+ e.preventDefault();if(p.placed)return;
+ const ghost=document.createElement("canvas");ghost.width=p.w;ghost.height=p.h;ghost.getContext("2d").drawImage(p.canvas,0,0);ghost.style.position="fixed";ghost.style.zIndex="100";ghost.style.pointerEvents="none";ghost.style.width=Math.min(115,Math.max(48,p.w*.25))+"px";ghost.style.height="auto";ghost.style.opacity=".94";ghost.style.filter="drop-shadow(0 7px 9px #27305244)";document.body.appendChild(ghost);
+ dragging={p,ghost,pointerId:e.pointerId,boardPoint:null};moveGhost(e.clientX,e.clientY);const bs=boardScale();dragging.boardPoint={x:(e.clientX-bs.rect.left)/bs.sx,y:(e.clientY-bs.rect.top)/bs.sy};drawBoard();
+ const move=ev=>{if(!dragging||ev.pointerId!==dragging.pointerId)return;moveGhost(ev.clientX,ev.clientY);const bs=boardScale();dragging.boardPoint={x:(ev.clientX-bs.rect.left)/bs.sx,y:(ev.clientY-bs.rect.top)/bs.sy};drawBoard()};
+ const up=ev=>{if(!dragging||ev.pointerId!==dragging.pointerId)return;document.removeEventListener("pointermove",move);document.removeEventListener("pointerup",up);document.removeEventListener("pointercancel",up);dropPiece(ev.clientX,ev.clientY,p)};
+ document.addEventListener("pointermove",move,{passive:false});document.addEventListener("pointerup",up);document.addEventListener("pointercancel",up);
+}
+function moveGhost(x,y){
+ const rect=dragging.ghost.getBoundingClientRect(),gw=rect.width,gh=rect.height;
+ // Keep the preview above the finger, rather than underneath the touch point.
+ dragging.ghost.style.left=(x-gw/2)+"px";
+ dragging.ghost.style.top=Math.max(4,y-gh-28)+"px";
+}
+function dropPiece(clientX,clientY,p){
+ const ghost=dragging.ghost;ghost.remove();dragging=null;drawBoard();
+ const {rect,sx,sy}=boardScale();const inside=clientX>=rect.left&&clientX<=rect.right&&clientY>=rect.top&&clientY<=rect.bottom;
+ if(!inside){render();return}
+ const bx=(clientX-rect.left)/sx,by=(clientY-rect.top)/sy;
+ const targetX=100+p.homeX,targetY=55+p.homeY;
+ // The user drops near the piece's exact home location. It then snaps to the exact pixel coordinates.
+ if(Math.abs(bx-targetX-p.w/2)<Math.max(35,p.w*.55)&&Math.abs(by-targetY-p.h/2)<Math.max(35,p.h*.55)){
+   p.placed=true;placed.add(p.id);tinySound(true);render();if(placed.size===pieces.length)win();
+ }else{tinySound(false);toast("Nearly! Try placing that shape closer to its matching outline.");render()}
+}
+function tinySound(ok){if(!soundOn)return;try{const ac=new(window.AudioContext||window.webkitAudioContext)(),o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);o.frequency.value=ok?720:210;g.gain.value=.035;o.start();o.frequency.exponentialRampToValueAtTime(ok?980:160,ac.currentTime+.09);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.14);o.stop(ac.currentTime+.15);o.onended=()=>ac.close()}catch(e){}}
+function win(){
+ if(pieces.length===0 || placed.size!==pieces.length)return;
+ const ch=letters[index];completed.add(ch);render();speak(ch+". "+words[ch][0]+".");confetti();
+ $("winMessage").textContent="You rebuilt "+ch+"! "+words[ch][1]+" "+ch+" is for "+words[ch][0]+".";
+ $("continue").textContent=index===25?"Finish!":"Next letter →";$("winModal").classList.add("show");
+ clearTimeout(autoTimer);const doneAt=index;if(index<25)autoTimer=setTimeout(()=>{if(index===doneAt&&completed.has(letters[doneAt])&&$("winModal").classList.contains("show"))go(index+1)},5000);
+}
+function confetti(){const cs=["#ff5b9b","#ffc936","#32c995","#35b6e8","#9460f6"];for(let i=0;i<40;i++){const el=document.createElement("i");el.className="confetti";el.style.left=Math.random()*100+"vw";el.style.background=cs[i%cs.length];el.style.animationDelay=Math.random()*.45+"s";document.body.appendChild(el);setTimeout(()=>el.remove(),2400)}}
+function go(i){if(i<0||i>=26)return;clearTimeout(autoTimer);index=i;placed=new Set();state=makePuzzle(letters[index]);pieces=state.pieces;$("winModal").classList.remove("show");render();speak("Let's build the letter "+letters[index]+".");window.scrollTo({top:0,behavior:"smooth"})}
+function restart(){placed=new Set();state=makePuzzle(letters[index]);pieces=state.pieces;$("winModal").classList.remove("show");render();toast("New puzzle pieces are ready!")}
+function hint(){const p=pieces.find(x=>!x.placed);if(!p)return;drawBoard();ctx.save();ctx.shadowColor="#ffb72f";ctx.shadowBlur=18;ctx.globalAlpha=.78;ctx.drawImage(p.canvas,100+p.homeX,55+p.homeY);ctx.restore();ctx.save();ctx.strokeStyle="#ffb72f";ctx.lineWidth=4;ctx.setLineDash([7,5]);ctx.strokeRect(100+p.homeX,55+p.homeY,p.w,p.h);ctx.restore();toast("Find the piece that matches the glowing shadow!");setTimeout(drawBoard,1300)}
+function mix(){pieces.sort(()=>Math.random()-.5).forEach((p,i)=>p.order=i+1);render();toast("Pieces mixed — find their matching places!")}
+$("soundToggle").addEventListener("click",()=>{soundOn=!soundOn;$("soundToggle").textContent=soundOn?"🔊 Sound":"🔇 Muted";if(!soundOn&&"speechSynthesis"in window)speechSynthesis.cancel();toast(soundOn?"Sound enabled":"Sound muted")});
+$("hear").addEventListener("click",()=>speak(letters[index]+". "+words[letters[index]][0]));
+$("restart").addEventListener("click",restart);$("hint").addEventListener("click",hint);$("mix").addEventListener("click",mix);
+$("prev").addEventListener("click",()=>go(index-1));$("next").addEventListener("click",()=>{if(index<25&&completed.has(letters[index]))go(index+1)});
+$("continue").addEventListener("click",()=>{if(index<25)go(index+1);else{$("winModal").classList.remove("show");toast("You are an Alphabet Hero! 🏆")}});
+$("hearAgain").addEventListener("click",()=>speak(letters[index]+". "+words[letters[index]][0]));
+$("winModal").addEventListener("click",e=>{if(e.target===$("winModal"))$("winModal").classList.remove("show")});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("winModal").classList.remove("show");if(e.key==="ArrowRight"&&completed.has(letters[index])&&index<25)go(index+1);if(e.key==="ArrowLeft"&&index>0)go(index-1)});
+go(0);
+})();
+</script>
+</body>
+</html>
